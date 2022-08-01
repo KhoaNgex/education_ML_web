@@ -1,2 +1,2 @@
 # education_ML_web
-![alt text](https://drive.google.com/file/d/148UCFQ7szzpaxrtHKoOuh1B_d2UqQ2uA/view?usp=sharing)
+<img src="/education_ML_web/images/demo_web.png" alt="Demo web" title="Demo web title">
