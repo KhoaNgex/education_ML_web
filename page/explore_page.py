@@ -211,7 +211,7 @@ def display_corr_heatmap():
     st.pyplot(fig)
 
 def display_score_hist(option):
-    hori_cus = st.checkbox("Horizontal")
+    hori_hist_cus = st.checkbox("Horizontal Histogram")
     discrete_cus = st.checkbox("Discrete Mode")
     kde_cus = st.checkbox("Add kernel density estimate")
     subgroup_cus = st.checkbox("Divide into subgroup")
@@ -231,7 +231,7 @@ def display_score_hist(option):
         stacked = st.checkbox("Stacked Histogram")
         if stacked:
             dis_mode = 'stack'
-    if hori_cus:
+    if hori_hist_cus:
         sns.histplot(data=df, y=option, kde=kde_cus, hue=cate_feature, discrete=discrete_cus, bins=bin_num, multiple=dis_mode)
     else:
         sns.histplot(data=df, x=option, kde=kde_cus, hue=cate_feature, discrete=discrete_cus, bins=bin_num, multiple=dis_mode)
