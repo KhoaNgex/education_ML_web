@@ -114,12 +114,12 @@ def display_filter():
         message = "You selected: " + option
         st.success(message)
         # Input
-        input = st.text_input('Name','Type something here...')
+        input = st.text_input('Name','')
         # Filter
-        data_filter = df[df[option].str.contains(pat=input, regex = True)]
+        data_filter = df[df[option].str.upper().contains(pat=input.upper(), regex = True)]
         # Show dataframe
         st.subheader("Dataset after Filtering")
-        st.write("Number of Students: ", df.shape[0])
+        st.write("Number of Students: ", data_filter.shape[0])
         st.dataframe(data_filter)
 
 def display_perc_dist():
