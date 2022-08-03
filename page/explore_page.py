@@ -104,7 +104,6 @@ def display_typical_metrics():
 
 def display_filter():
     st.subheader("Filter")
-    st.info()
     option = st.selectbox(
      'Please choose a feature to filter',
      tuple(df.columns))
