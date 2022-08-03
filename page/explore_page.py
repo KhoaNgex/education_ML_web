@@ -116,7 +116,7 @@ def display_filter():
         # Input
         input = st.text_input('Name','Type something here...')
         # Filter
-        data_filter = df[str(df[option]).upper()==input.upper()]
+        data_filter = df[df[option].str.contains(pat=input, regex = True)]
         # Show dataframe
         st.subheader("Dataset after Filtering")
         st.write("Number of Students: ", df.shape[0])
