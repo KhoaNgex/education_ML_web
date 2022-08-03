@@ -85,7 +85,7 @@ def load_data():
             st.dataframe(df)
     else:
         st.warning("Please Upload Dataset!")
-
+        
 def display_typical_metrics():
     st.subheader("Typical Metrics")
     # calculate percentage of students who have good grade
@@ -101,6 +101,27 @@ def display_typical_metrics():
     met_col1.metric("Total", value=df.shape[0], delta=df.shape[0], delta_color="off")
     met_col2.metric("Good Grade", good_grade_freq_str, good_grade_perc_str)
     met_col3.metric("Average Grade", value=aver_score_str, delta="Fair")
+
+def display_filter():
+    st.subheader("Filter")
+    st.info()
+    option = st.selectbox(
+     'Please choose a feature to filter',
+     tuple(df.columns))
+    
+    if option == 'none':
+        st.warning('Please select a feature...')
+    else:
+        message = "You selected: " + option
+        st.success(message)
+        # Input
+        input = st.text_input('Name','Type something here...')
+        # Filter
+        data_filter = df[str(df[option]).upper()==input.upper()]
+        # Show dataframe
+        st.subheader("Dataset after Filtering")
+        st.write("Number of Students: ", df.shape[0])
+        st.dataframe(data_filter)
 
 def display_perc_dist():
     st.subheader("Pie Chart - Percentage distribution of Students")
@@ -299,6 +320,8 @@ def show_explore_page():
     if df.empty == False:
         st.header("Explore Statistics")
         display_typical_metrics()
+        st.markdown('##')
+        display_filter()
         st.markdown('##')
         display_perc_dist()
         st.markdown('##')
