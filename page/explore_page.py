@@ -1,4 +1,8 @@
+from distutils import errors
 import os
+from git import UpdateProgress
+from numpy import number
+import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
@@ -85,7 +89,40 @@ def load_data():
             st.dataframe(df)
     else:
         st.warning("Please Upload Dataset!")
-        
+
+def display_filter():
+    st.subheader("Choose feature and key word to filter")
+    option = st.selectbox(
+     'Please choose a feature to filter',
+     tuple(df.columns))
+    
+    if option == 'none':
+        st.warning('Please select a feature...')
+    else:
+        message = "You selected: " + option
+        st.success(message)
+        # Input
+        input = st.text_input('Key Word','')
+        st.subheader("Dataset after Filtering")
+        if input!='':
+        # Filter
+            sub = df[option]
+            if sub.dtypes == 'int64':
+                try:
+                    input = int(input)
+                except:
+                    st.warning("Invalid Value!")
+                sub = (sub == input)
+            else:    
+                sub.str.upper()
+                input = input.upper()
+                sub = (sub == input)
+            data_filter = df[sub]
+            data_filter.index = np.arange(1,len(data_filter)+1)
+            # Show dataframe
+            st.write("Number of Students: ", data_filter.shape[0])
+            st.dataframe(data_filter)
+
 def display_typical_metrics():
     st.subheader("Typical Metrics")
     # calculate percentage of students who have good grade
@@ -101,26 +138,6 @@ def display_typical_metrics():
     met_col1.metric("Total", value=df.shape[0], delta=df.shape[0], delta_color="off")
     met_col2.metric("Good Grade", good_grade_freq_str, good_grade_perc_str)
     met_col3.metric("Average Grade", value=aver_score_str, delta="Fair")
-
-def display_filter():
-    st.subheader("Filter")
-    option = st.selectbox(
-     'Please choose a feature to filter',
-     tuple(df.columns))
-    
-    if option == 'none':
-        st.warning('Please select a feature...')
-    else:
-        message = "You selected: " + option
-        st.success(message)
-        # Input
-        input = st.text_input('Name','')
-        # Filter
-        data_filter = df[df[option].str.contains(pat=input, regex = True)]
-        # Show dataframe
-        st.subheader("Dataset after Filtering")
-        st.write("Number of Students: ", data_filter.shape[0])
-        st.dataframe(data_filter)
 
 def display_perc_dist():
     st.subheader("Pie Chart - Percentage distribution of Students")
@@ -317,10 +334,11 @@ def show_explore_page():
     st.markdown('#')
     # display EDA
     if df.empty == False:
+        st.header("Filter")
+        display_filter()
+        st.markdown('#')
         st.header("Explore Statistics")
         display_typical_metrics()
-        st.markdown('##')
-        display_filter()
         st.markdown('##')
         display_perc_dist()
         st.markdown('##')
@@ -329,6 +347,4 @@ def show_explore_page():
         display_corr_heatmap()
         st.markdown('##')
         display_score_explore()
-        
-
-
+      
