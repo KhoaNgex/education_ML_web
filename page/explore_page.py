@@ -1,6 +1,10 @@
 from sklearn.base import BaseEstimator, TransformerMixin
 from typing import Tuple
+from distutils import errors
 import os
+from git import UpdateProgress
+from numpy import number
+import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
@@ -91,6 +95,40 @@ def load_data():
             st.dataframe(df)
     else:
         st.warning("Please Upload Dataset!")
+
+
+def display_filter():
+    st.subheader("Choose feature and key word to filter")
+    option = st.selectbox(
+        'Please choose a feature to filter',
+        tuple(df.columns))
+
+    if option == 'none':
+        st.warning('Please select a feature...')
+    else:
+        message = "You selected: " + option
+        st.success(message)
+        # Input
+        input = st.text_input('Key Word', '')
+        st.subheader("Dataset after Filtering")
+        if input != '':
+            # Filter
+            sub = df[option]
+            if sub.dtypes == 'int64':
+                try:
+                    input = int(input)
+                except:
+                    st.warning("Invalid Value!")
+                sub = (sub == input)
+            else:
+                sub.str.upper()
+                input = input.upper()
+                sub = (sub == input)
+            data_filter = df[sub]
+            data_filter.index = np.arange(1, len(data_filter)+1)
+            # Show dataframe
+            st.write("Number of Students: ", data_filter.shape[0])
+            st.dataframe(data_filter)
 
 
 def display_typical_metrics():
@@ -318,6 +356,9 @@ def show_explore_page():
     st.markdown('#')
     # display EDA
     if df.empty == False:
+        st.header("Filter")
+        display_filter()
+        st.markdown('#')
         st.header("Explore Statistics")
         display_typical_metrics()
         st.markdown('##')
