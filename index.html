@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Test</title>
+    <!-- FONT AWESOME -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Quicksand:wght@300;400;500;600;700&display=swap');
+      * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+        font-family: 'Dancing Script', cursive;
+        font-family: 'Poppins', sans-serif;
+        font-family: 'Quicksand', sans-serif;
+      }
+      .member__list {
+        width: 100%;
+        margin: auto;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        padding: 50px 0;
+      }
+      .member__avatar {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .member__avatar img {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+      }
+      .member__avatar img:hover {
+        transform: scale(1.1);
+        cursor: pointer;
+        opacity: 0.8;
+      }
+      .member__info {
+        text-align: center;
+        padding: 10px 0;
+      }
+      .member__info h4 {
+        padding: 5px 0;
+      }
+      .member__info p {
+        width: 50%;
+        margin: auto;
+        font-size: 13px;
+        padding: 5px 0;
+      }
+      .member__contact {
+        width: 30%;
+        margin: auto;
+        padding: 5px 0;
+        display: flex;
+        justify-content: space-between;
+      }
+      .member__contact i {
+        color: #4186f6;
+      }
+      .member__contact i:hover {
+        color: #ff0e83;
+        cursor: pointer;
+        transform: scale(1.1);
+      }
+      @media screen and (max-width: 400px) {
+        .member__list {
+          width: 100%;
+          margin: auto;
+          display: grid;
+          grid-template-columns: repeat(1, 1fr);
+          padding: 50px 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="member__list">
+      <div class="member__item">
+        <div class="member__avatar">
+          <img
+            src="https://raw.githubusercontent.com/anduc146khmt/BDC_Assignment1/master/img/khoa2.jpg"
+            alt=""
+          />
+        </div>
+        <div class="member__info">
+          <h4>Nguyễn Đặng Anh Khoa</h4>
+          <h4>Team Leader</h4>
+          <p>K20 Khoa Học Máy Tính, ĐH Bách Khoa TPHCM</p>
+          <div class="member__contact">
+            <a href="https://www.facebook.com/khoanorman" target="_blank"
+              ><i class="fa-brands fa-facebook"></i
+            ></a>
+            <a href="mailto:khoa.nguyenakaivn@hcmut.edu.vn" target="_blank"
+              ><i class="fa fa-envelope"></i
+            ></a>
+            <a href="tel:0962646979" target="_blank"
+              ><i class="fa fa-phone"></i
+            ></a>
+          </div>
+        </div>
+      </div>
+      <div class="member__item">
+        <div class="member__avatar">
+          <img
+            src="https://raw.githubusercontent.com/anduc146khmt/BDC_Assignment1/master/img/an2.jpg"
+            alt=""
+          />
+        </div>
+        <div class="member__info">
+          <h4>Nguyễn Đức An</h4>
+          <h4>Team Member</h4>
+          <p>K20 Khoa Học Máy Tính, ĐH Bách Khoa TPHCM</p>
+          <div class="member__contact">
+            <a href="https://www.facebook.com/an.nguyenduc1406" target="_blank"
+              ><i class="fa-brands fa-facebook"></i
+            ></a>
+            <a href="mailto:an.nguyenduc1406@hcmut.edu.vn" target="_blank"
+              ><i class="fa fa-envelope"></i
+            ></a>
+            <a href="tel:0852531027" target="_blank"
+              ><i class="fa fa-phone"></i
+            ></a>
+          </div>
+        </div>
+      </div>
+      <div class="member__item">
+        <div class="member__avatar">
+          <img
+            src="https://raw.githubusercontent.com/anduc146khmt/BDC_Assignment1/master/img/phuc.jpg"
+            alt=""
+          />
+        </div>
+        <div class="member__info">
+          <h4>Huỳnh Nguyên Phúc</h4>
+          <h4>Team Member</h4>
+          <p>K21 Khoa Học Máy Tính, ĐH Bách Khoa TPHCM</p>
+          <div class="member__contact">
+            <a
+              href="https://www.facebook.com/phuc.huynhnguyen.716"
+              target="_blank"
+              ><i class="fa-brands fa-facebook"></i
+            ></a>
+            <a href="mailto:phuc.huynhdaihocbk94@hcmut.edu.vn" target="_blank"
+              ><i class="fa fa-envelope"></i
+            ></a>
+            <a href="tel:0362020259" target="_blank"
+              ><i class="fa fa-phone"></i
+            ></a>
+          </div>
+        </div>
+      </div>
+      <div class="member__item">
+        <div class="member__avatar">
+          <img
+            src="https://raw.githubusercontent.com/anduc146khmt/BDC_Assignment1/master/img/minh2.jpg"
+            alt=""
+          />
+        </div>
+        <div class="member__info">
+          <h4>Phạm Đức Minh</h4>
+          <h4>Team Member</h4>
+          <p>K21 Kỹ Thuật Máy Tính, ĐH Bách Khoa TPHCM</p>
+          <div class="member__contact">
+            <a href="https://www.facebook.com/phamdkminh" target="_blank"
+              ><i class="fa-brands fa-facebook"></i
+            ></a>
+            <a href="mailto:phamduc1365@hcmut.edu.vn" target="_blank"
+              ><i class="fa fa-envelope"></i
+            ></a>
+            <a href="tel:0909712391" target="_blank"
+              ><i class="fa fa-phone"></i
+            ></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
