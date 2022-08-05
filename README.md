@@ -3,6 +3,20 @@ The proposed system will display results of student performance on a single clic
 
 The proposed system finds out student trends on the basis of outcomes of students academic performance, strengths, weakness, hobbies and extra - curricular activities. Academic data includes unit test, students theory, practicals and term work marks. This data gathered will be processed by classification algorithm of data mining.
 
+# Description
+
+You can easily use our product by installing streamlit and running some scripts.
+
+```bash
+git clone https://github.com/KhoaNgex/education_ML_web
+```
+
+```bash
+streamlit run main.py
+```
+
+
+
 # ⛳ Result
 * Dataset: [http://archive.ics.uci.edu/ml/datasets/Student+Performance#](http://archive.ics.uci.edu/ml/datasets/Student+Performance#)
 * Google Colab: [Assignment3_Group1.ipynb](https://drive.google.com/file/d/1oVoCSEIr0IWa3FSdN6mM_LvmH2UAiV65/view?usp=sharing)
