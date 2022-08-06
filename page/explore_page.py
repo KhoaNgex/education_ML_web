@@ -99,33 +99,50 @@ def load_data():
 
 def display_filter():
     st.subheader("Choose feature and key word to filter")
+    feature = ['none']
+    feature.extend(df.columns)
     option = st.selectbox(
-        'Please choose a feature to filter',
-        tuple(df.columns))
-
+     'Please choose a feature to filter',
+     tuple(feature))
+    
     if option == 'none':
-        st.warning('Please select a feature...')
+        st.warning('Please select a feature!')
     else:
         message = "You selected: " + option
         st.success(message)
+        # Pre-Processing
+        sub_df = df.copy()
         # Input
-        input = st.text_input('Key Word', '')
+        input = st.text_input('Key Word','')
         st.subheader("Dataset after Filtering")
-        if input != '':
-            # Filter
-            sub = df[option]
+        # Filter
+        if input!='':
+            sub = sub_df[option]
             if sub.dtypes == 'int64':
                 try:
                     input = int(input)
                 except:
                     st.warning("Invalid Value!")
                 sub = (sub == input)
-            else:
-                sub.str.upper()
-                input = input.upper()
+            elif sub.dtypes == 'float64':
+                try:
+                    input = float(input)
+                except:
+                    st.warning("Invalid Value!")
                 sub = (sub == input)
+            else:    
+                for i in range(0,len(sub)):
+                    sub.iloc[i,]=sub.iloc[i,].upper()
+                input = input.upper()
+                sub_list = []
+                for i in range(0,len(sub)):
+                    if sub.iloc[i,].find(input)==-1:
+                        sub.iloc[i,] = False
+                    else:
+                        sub_list.append(sub.iloc[i,])
+                        sub.iloc[i,] = True
             data_filter = df[sub]
-            data_filter.index = np.arange(1, len(data_filter)+1)
+            data_filter.index = np.arange(1,len(data_filter)+1)
             # Show dataframe
             st.write("Number of Students: ", data_filter.shape[0])
             st.dataframe(data_filter)
