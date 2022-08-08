@@ -1,14 +1,17 @@
 import copy
 import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+sns.set_style('darkgrid')
 import streamlit as st
 import pickle
 import os
 from PIL import Image
-
+from components.note_card import card
 
 def load_model():
     dirname = os.path.dirname(__file__)
-    filename = os.path.join(dirname, '../model/save_steps.pkl')
+    filename = os.path.join(dirname, '../model/saved_model.pkl')
     with open(filename, 'rb') as file:
         data = pickle.load(file)
     return data
@@ -153,7 +156,7 @@ def show_predict_page():
         ":male-doctor: Student evaluates his/her current health status (band score from 1 to 5):")
     health_select = st.slider("Current health status", 1, 5, 1)
 
-    st.write(":running: Number of school absence days that student has?:")
+    st.write(":running: How many school absence days that student has?")
     absence_select = st.slider("Number of school absences", 0, 93, 5)
 
     st.write(
@@ -167,7 +170,7 @@ def show_predict_page():
         "Assignment Score", min_value=0, max_value=20, value=0)
 
     st.subheader(
-        ":one: Student Information You've just enter (after encoding): ")
+        ":one: Student Information you've just entered (after encoding): ")
     student_info = {
         'school': [school_select],
         'sex': [sex_select],
@@ -206,19 +209,15 @@ def show_predict_page():
 
     st.subheader(":two: Student Final Score Estimator")
     st.info(":ledger: Let's see how this student performs in **final exam test**!")
-
-    estimate_score = st.button("Estimate Final Score")
     student_info_np = student_info_df.to_numpy()
     col_list = student_info_df.columns
 
-    # dissolve model and label encoders
+    # dissolve label encoders
     object_attribute = ['school', 'sex', 'address', 'family_size', 'parents_status', 'mother_job', 'father_job',
                         'reason', 'school_support', 'family_support', 'paid_classes', 'activities', 'desire_higher_edu', 'internet']
-    regressor_loaded = data["linear_regressor"]
     for attribute in object_attribute:
         le_name = "le_" + attribute
         globals()[le_name] = data[le_name]
-
     # feature encoding
     # make a deep copy
     student_info_np_encode = copy.deepcopy(student_info_np)
@@ -227,6 +226,68 @@ def show_predict_page():
         student_info_np_encode[:, col_list.get_loc(attribute)] = globals(
         )[le_name].transform(student_info_np_encode[:, col_list.get_loc(attribute)])
 
+    # choose model 
+    model_dict = {
+        "Linear Regression": "linear_regressor",
+        "LASSO Regression": "lasso_regressor",
+        "Ridge Regression": "ridge_regressor",
+        "Support Vector Regression": "support_vector_regressor",
+        "Decision Tree Regression": "decision_tree_regressor",
+        "Random Forest Regression": "random_forest_regressor"
+    }
+    model_select = st.radio("🎯 Choose the estimator. Here are some options for you:", model_dict)
+    regressor_loaded = data[model_dict[model_select]]
+    
+    estimate_score = st.button("Estimate Final Score")
+    compare_mode = st.checkbox("Compare estimated score between models")
     if estimate_score:
         score_estimated = regressor_loaded.predict(student_info_np_encode)
+        if score_estimated[0] < 0:
+            score_estimated[0] = 0.00
         st.subheader(f"The estimated final score is {score_estimated[0]:.2f}")
+
+    if compare_mode:
+        st.markdown("###")
+        model_options = st.multiselect(
+     '⛳ Which models you want to compare?',
+     ['Linear Regression', 'LASSO Regression', 'Ridge Regression', 'Support Vector Regression', 'Decision Tree Regression', 'Random Forest Regression'],
+     ['Linear Regression', 'LASSO Regression'])
+        score_list = []
+        if len(model_options) > 0:
+            for model in model_options:
+                reg = data[model_dict[model]]
+                score_est = reg.predict(student_info_np_encode)
+                if score_est[0] < 0:
+                    score_est[0] = 0.00
+                score_list.append(round(score_est[0],2))
+            fig = plt.figure()
+            ax = sns.barplot(model_options,score_list)
+            ax.bar_label(ax.containers[0])
+            ax.set_xlabel("Models")
+            ax.set_ylabel("Estimated Score")
+            st.pyplot(fig)
+
+    st.subheader(":three: Student Performance Classifer")
+    st.info("🈴️ Classify student performance based on his/her provided information. It seems to be a bit unfair but let's try!🙂🙂")
+    note_header = "🙋 Classification Level"
+    note_body = "🙅 POOR --- Haizz, you must learn more! <br>👻 FAIR --- Well, you are fair. Let's try harder to get promoted! <br>🙏 GOOD --- Wow, you are god!!"
+    card(note_header, note_body)
+    st.markdown("###")
+    # choose classifer
+    classifer_dict = {
+        "Decision Tree Classifer": "decision_tree_classifer",
+        "Random Forest Classifer": "random_forest_classifer",
+        "Support Machine Vector": "support_vector_classifer",
+        "AdaBoost Classifer": "ada_boost_classifer"
+    }
+    classifer_select = st.radio("🎯 Choose the classifer. Here are some options for you:", classifer_dict)
+    classifer_loaded = data[classifer_dict[classifer_select]]
+    classify_score = st.button("Classify")
+    if classify_score:
+        perc_type = classifer_loaded.predict(student_info_np_encode)
+        if perc_type == 0:
+            st.warning("👻 FAIR - **Well, you are fair. Let's try harder to get promoted!**")
+        elif perc_type == 1:
+            st.success("🙏 GOOD - **Wow, you are GOD!!**")
+        elif perc_type == 2:
+            st.error("🙅 POOR - **Haizz, you must learn more!**")

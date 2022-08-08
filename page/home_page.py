@@ -1,22 +1,14 @@
 # Core Pkgs
-from pydoc import html
 import streamlit as st
 from PIL import Image
 # Utils Pkgs
 import codecs
-
 # Components Pkgs
 import streamlit.components.v1 as stc
-
 from components.note_card import card
 
-# Custom Components Fxn
-
-# Use html if you want :>
-
-
 def st_render(render_html, width=700, height=500):
-    calc_file = codecs.open(render_html, 'r')
+    calc_file = codecs.open(render_html, 'r', encoding='utf-8', errors='ignore')
     page = calc_file.read()
     stc.html(page, width=width, height=height, scrolling=False)
 
@@ -31,7 +23,7 @@ def home_result():
         "Dataset: [http://archive.ics.uci.edu/ml/datasets/Student+Performance#](http://archive.ics.uci.edu/ml/datasets/Student+Performance#y)")
     st.warning(
         'Google Colab: [Assignment3_Group1.ipynb](https://drive.google.com/file/d/1oVoCSEIr0IWa3FSdN6mM_LvmH2UAiV65/view?usp=sharing)')
-    st.error(
+    st.success(
         'Landing Page: [Assignment1_Group1](http://anduckhmt146.me/BDC_Assignment1/)')
 
 
@@ -53,7 +45,7 @@ def home_team():
 
 
 def home_reference():
-    st.info('Paper:[Applying Data Mining in Moodle, 12/06/2018, Cristóbal Romero Morales](https://drive.google.com/file/d/11MuWcfKdhXFOBEA_x7vewxYcmQhtouy-/view)')
+    st.info('Paper: [Applying Data Mining in Moodle, 12/06/2018, Cristóbal Romero Morales](https://drive.google.com/file/d/11MuWcfKdhXFOBEA_x7vewxYcmQhtouy-/view)')
     st.info('Paper: [Real-Time Analysis of Students Activities on an E-Learning Platform based on Apache Spark, Vol.8, No.7, 2017, Abdelmajid Chaffai, Larbi Hassouni, Houda Anoun](https://drive.google.com/file/d/1j27Bs6Cw26ZVeBfVBrwMfiF4i5iUzGg-/view)')
     st.info('Paper: [Development of Machine Learning Models using Study Behavior Predictors of Students Academic Performance Through Moodle, Volume-8, Issue-6S3, April 2019,Edmund D. Evangelista](https://drive.google.com/file/d/12E2XcER52hApPStQelgJC4ZKMO8yw068/view)')
     st.warning(
@@ -72,15 +64,21 @@ def show_home_page():
     # st_render('page/home_page/home.html')
     st.header(':house: Welcome to our project')
     home_intro()
+    st.markdown("##")
     st.subheader('⛳ Result')
     home_result()
+    st.markdown("##")
     st.subheader('🔢 About Dataset')
     home_data()
+    st.markdown("##")
     st.subheader('🎯 Aim')
     home_aim()
+    st.markdown("##")
     st.subheader('💑 Our Team')
     home_team()
+    st.markdown("##")
     st.subheader('📚 References')
     home_reference()
+    st.markdown("##")
     st.subheader('📫 Contact')
     home_contact()

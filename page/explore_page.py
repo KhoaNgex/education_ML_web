@@ -1,9 +1,6 @@
 from sklearn.base import BaseEstimator, TransformerMixin
 from typing import Tuple
-from distutils import errors
 import os
-from git import UpdateProgress
-from numpy import number
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -93,8 +90,10 @@ def load_data():
             st.write("Number of Features: ", df.shape[1])
             st.write("Number of Students: ", df.shape[0])
             st.dataframe(df)
+            return df
     else:
         st.warning("Please Upload Dataset!")
+    return None
 
 
 def display_filter():

@@ -33,3 +33,6 @@ streamlit run main.py
 
 # 🔥 Prediction Page
 <img src="images/demo_web_2.png" alt="Demo web 2" title="Demo web 2 title">
+
+# 🤖 Model Comparison Page
+<img src="images/demo_web_5.png" alt="Demo web 5" title="Demo web 5 title">
