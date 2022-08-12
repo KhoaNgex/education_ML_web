@@ -15,7 +15,6 @@ cffi
 chardet
 click
 colorama
-command-not-found
 commonmark
 cryptography
 cupshelpers
