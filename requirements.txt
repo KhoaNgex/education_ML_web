@@ -51,7 +51,6 @@ jupyterlab-pygments
 jupyterlab-widgets
 keyring
 kiwisolver
-language-selector
 launchpadlib
 lazr.restfulclient
 lazr.uri
