@@ -17,7 +17,6 @@ click
 colorama
 commonmark
 cryptography
-cupshelpers
 cycler
 dbus-python
 debugpy
