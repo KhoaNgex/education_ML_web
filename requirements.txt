@@ -135,7 +135,6 @@ traitlets
 typing_extensions
 tzdata
 tzlocal
-ubuntu-drivers-common
 ufw
 unattended-upgrades
 urllib3
