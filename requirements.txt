@@ -24,7 +24,6 @@ decorator
 defer
 defusedxml
 distro
-distro-info===1.1build1
 duplicity
 entrypoints
 executing
