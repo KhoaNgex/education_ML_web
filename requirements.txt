@@ -33,7 +33,6 @@ fonttools
 future
 gitdb
 GitPython
-gyp
 hijra
 httplib2
 idna
