@@ -3,6 +3,8 @@ The proposed system will display results of student performance on a single clic
 
 The proposed system finds out student trends on the basis of outcomes of students academic performance, strengths, weakness, hobbies and extra - curricular activities. Academic data includes unit test, students theory, practicals and term work marks. This data gathered will be processed by classification algorithm of data mining.
 
+Heroku App: https://elearning-analysis-system.herokuapp.com/
+
 # Description
 
 You can easily use our product by installing streamlit and running some scripts.
