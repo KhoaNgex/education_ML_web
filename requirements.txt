@@ -102,9 +102,7 @@ PyNaCl
 pyparsing
 pyRFC3339
 pyrsistent
-python-apt==2.3.0+ubuntu2.1
 python-dateutil
-python-debian===0.1.43ubuntu1
 pytz
 pytz-deprecation-shim==0.1.0.post0
 pyxdg
