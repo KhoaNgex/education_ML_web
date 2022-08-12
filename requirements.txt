@@ -33,7 +33,6 @@ fonttools
 future
 gitdb
 GitPython
-hijra
 httplib2
 idna
 importlib-metadata
