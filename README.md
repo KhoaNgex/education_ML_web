@@ -10,7 +10,7 @@ Heroku App: https://elearning-analysis-system.herokuapp.com/
 You can easily use our product by installing streamlit and running some scripts.
 
 ```bash
-git clone https://github.com/KhoaNgex/education_ML_web
+git clone https://github.com/anduc146khmt/ElearningAnalysisApp
 ```
 
 ```bash
