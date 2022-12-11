@@ -1,14 +1,16 @@
-# Educational ML Website
+# Elearning Analysis App
 The proposed system will display results of student performance on a single click action by the user, thus inducing automation and reducing efforts of staff in analyzing student performance manually. 
 
 The proposed system finds out student trends on the basis of outcomes of students academic performance, strengths, weakness, hobbies and extra - curricular activities. Academic data includes unit test, students theory, practicals and term work marks. This data gathered will be processed by classification algorithm of data mining.
+
+Heroku App: https://elearning-analysis-system.herokuapp.com/
 
 # Description
 
 You can easily use our product by installing streamlit and running some scripts.
 
 ```bash
-git clone https://github.com/KhoaNgex/education_ML_web
+git clone https://github.com/anduc146khmt/ElearningAnalysisApp
 ```
 
 ```bash
